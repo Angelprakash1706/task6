@@ -1,0 +1,208 @@
+<html></html>
+    <head>
+        <title>Personal Details</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+            margin: 2px;
+            background: url("https://images.pexels.com/photos/7130563/pexels-photo-7130563.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"), #010614;
+            background-size: cover;
+
+            
+        }
+        h1{
+            color: rgb(248, 245, 245);
+            display: flex;
+            text-align: center;
+            justify-content: center;
+        }
+        fieldset{
+            border: bold;
+            margin-bottom: 0px;
+
+        }
+        form{
+            width:350px;
+            background-color:transparent;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+        }
+        input[type=text],input[type=date],textarea,input[type=email],input[type=tel],input[type=password]{
+            width: 100%;
+            padding: 8px;
+            border: 1px solid white;
+            border-radius: 4px;
+            background-color: transparent;
+            color: rgb(16, 1, 1);
+        }
+        button{
+           
+            color: rgb(252, 248, 248);
+            cursor: pointer;
+            background-color: green;
+            padding: 30spx;
+            font-size: medium;
+            margin-left:80px ;
+            width: 50%;
+            text-align: center;
+           
+        }
+        p{
+            text-align: center;
+        }
+        @media screen and(max-width:1300px){
+            body{
+                background:url("https://png.pngtree.com/thumb_back/fw800/background/20231228/pngtree-vibrant-watercolor-blend-abstract-pastel-green-and-blue-texture-image_13893438.png");
+                background-size: cover;
+            }
+        }
+        @media screen and(max-width:800px) {
+            body{
+                background:url("https://t4.ftcdn.net/jpg/06/87/32/27/360_F_687322721_3H4NiDMDw5jKDMCVdPgmqSFXGHZlMg3T.jpg");
+                background-size:cover;
+            }
+            
+        }
+        @media screen and(max-width:500px) {
+            body{
+                background:url("https://t3.ftcdn.net/jpg/07/43/87/94/360_F_743879440_LdxyB9MhenKTTkfu9B2GcHaHF8JxUiYM.jpg");
+                background-size:cover;
+            }
+            
+        }
+    </style>
+    </head>
+    <body>
+        
+        <form>
+            
+            <fieldset>
+                <h1><b><u>PERSONAL DETAILS</u></b></h1>
+               <label> <b>Enter First Name:</b></label>
+            <input type="text" name="first name">
+            <br><br>
+                <label> <b>Enter Last Name:</b></label>
+                <input type="text" name="Last name">
+                <br><br>
+                    <label><b> Enter Email Id:</b></label>
+                    <input type="email" name="email">
+                    <br><br>
+                    <label><b>Enter password:</b></label>
+            <input type="password" name="password">
+            <br><br>
+                        <label><b>Phone Number:</b></label>
+                        <input type="tel" name="number">  
+                        <br><br>      
+                <label><b>Date Of Birth:</b></label>
+                <input type="date" name="dob" >
+                <br><br>
+                <label><b>Gender:</b></label>
+                <input type="radio" name="gender" value="male">male
+                <input type="radio" name="gender" value="female" >female
+                <input type="radio" name="gender" value="other" >other
+                <br><br>
+                <label> <b>Enter Your Address:</b></label>
+                <textarea cols="=50" rows="5"value="Address" ></textarea>
+                <br><br>
+                <label><b>Hobbies:</b></label>
+                <input type="checkbox"  value="drawing" >drawing
+                <input type="checkbox"  value="reading">reading
+                <input type="checkbox" value="editing">editing
+                <br><br>
+               <button type="submit" >Register</button>
+               <p>Already have an Account?
+                <a href="index.html">Login</a>
+            </p>
+                
+            </fieldset>
+            </form>
+            <script>
+                document.querySelector('form').addEventListener('submit', function(event) {
+                    let valid = true;
+                    const firstName = document.querySelector('input[name="first name"]');
+                    const lastName = document.querySelector('input[name="Last name"]');
+                    const email = document.querySelector('input[name="email"]');
+                    const password = document.querySelector('input[name="password"]');
+                    const phoneNumber = document.querySelector('input[name="number"]');
+                    const dob = document.querySelector('input[name="dob"]');
+                    const address = document.querySelector('textarea');
+                    const hobbies = document.querySelectorAll('input[type="checkbox"]:checked');
+                    
+                    // Clear previous error messages
+                    clearErrors();
+            
+                    // Validate first name
+                    if (!firstName.value.trim()) {
+                        valid = false;
+                        showError(firstName, 'First Name is required');
+                    }
+            
+                    // Validate last name
+                    if (!lastName.value.trim()) {
+                        valid = false;
+                        showError(lastName, 'Last Name is required');
+                    }
+            
+                    // Validate email
+                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!email.value.trim() || !emailPattern.test(email.value)) {
+                        valid = false;
+                        showError(email, 'Valid Email is required');
+                    }
+            
+                    // Validate password
+                    if (password.value.length < 6) {
+                        valid = false;
+                        showError(password, 'Password must be at least 6 characters');
+                    }
+            
+                    // Validate phone number
+                    const phonePattern = /^\d{10}$/;
+                    if (!phoneNumber.value.trim() || !phonePattern.test(phoneNumber.value)) {
+                        valid = false;
+                        showError(phoneNumber, 'Valid Phone Number is required (10 digits)');
+                    }
+            
+                    // Validate date of birth
+                    if (!dob.value) {
+                        valid = false;
+                        showError(dob, 'Date of Birth is required');
+                    }
+            
+                    // Validate address
+                    if (!address.value.trim()) {
+                        valid = false;
+                        showError(address, 'Address is required');
+                    }
+            
+                    // Validate hobbies
+                    if (hobbies.length === 0) {
+                        valid = false;
+                        alert('Please select at least one hobby');
+                    }
+            
+                    // If not valid, prevent form submission
+                    if (!valid) {
+                        event.preventDefault();
+                    }
+                });
+            
+                function showError(input, message) {
+                    const error = document.createElement('div');
+                    error.className = 'error';
+                    error.textContent = message;
+                    input.parentNode.insertBefore(error, input.nextSibling);
+                }
+            
+                function clearErrors() {
+                    const errors = document.querySelectorAll('.error');
+                    errors.forEach(error => error.remove());
+                }
+            </script>
+            
+    </body>
+</html>
